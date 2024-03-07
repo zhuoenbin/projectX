@@ -1,7 +1,6 @@
 package com.ispan.projectX.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -13,31 +12,31 @@ public class Complaint {
     @Column(name = "complaint_id")
     private Integer complaintId;
 
-    @Column(name = "complainant_id", nullable = false)
+    @Column(name = "complainant_id")
     private Integer complainantId;
 
-    @Column(name = "classification", nullable = false)
+    @Column(name = "classification")
     private Integer classification;
 
-    @Column(name = "Respondent_id", nullable = false)
+    @Column(name = "respondent_id")
     private Integer respondentId;
 
-    @Column(name = "problem_id", nullable = false)
+    @Column(name = "problem_id")
     private Integer problemId;
 
-    @Column(name = "problem_detail", nullable = false)
+    @Column(name = "problem_detail")
     private String problemDetail;
 
     @Column(name = "complaint_time")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date complaintTime;
 
     @Column(name = "finish_time")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date finishTime;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @Column(name = "employee_id")
+    private Integer employeeId;
 
     @Column(name = "problem_status")
     private String problemStatus;
@@ -45,7 +44,36 @@ public class Complaint {
     @Column(name = "status_detail")
     private String statusDetail;
 
+    @ManyToOne
+    @JoinColumn(name = "complainant_id", referencedColumnName = "user_id")
+    private Users complainant;
+
+    @ManyToOne
+    @JoinColumn(name = "problem_id", referencedColumnName = "problem_id")
+    private Problem problem;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    private Employee employee;
+
     public Complaint() {
+    }
+
+    public Complaint(Integer complaintId, Integer complainantId, Integer classification, Integer respondentId, Integer problemId, String problemDetail, Date complaintTime, Date finishTime, Integer employeeId, String problemStatus, String statusDetail, Users complainant, Problem problem, Employee employee) {
+        this.complaintId = complaintId;
+        this.complainantId = complainantId;
+        this.classification = classification;
+        this.respondentId = respondentId;
+        this.problemId = problemId;
+        this.problemDetail = problemDetail;
+        this.complaintTime = complaintTime;
+        this.finishTime = finishTime;
+        this.employeeId = employeeId;
+        this.problemStatus = problemStatus;
+        this.statusDetail = statusDetail;
+        this.complainant = complainant;
+        this.problem = problem;
+        this.employee = employee;
     }
 
     public Integer getComplaintId() {
@@ -112,12 +140,12 @@ public class Complaint {
         this.finishTime = finishTime;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Integer getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getProblemStatus() {
@@ -136,6 +164,30 @@ public class Complaint {
         this.statusDetail = statusDetail;
     }
 
+    public Users getComplainant() {
+        return complainant;
+    }
+
+    public void setComplainant(Users complainant) {
+        this.complainant = complainant;
+    }
+
+    public Problem getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Complaint{");
@@ -147,9 +199,12 @@ public class Complaint {
         sb.append(", problemDetail='").append(problemDetail).append('\'');
         sb.append(", complaintTime=").append(complaintTime);
         sb.append(", finishTime=").append(finishTime);
-        sb.append(", employee=").append(employee);
+        sb.append(", employeeId=").append(employeeId);
         sb.append(", problemStatus='").append(problemStatus).append('\'');
         sb.append(", statusDetail='").append(statusDetail).append('\'');
+        sb.append(", complainant=").append(complainant);
+        sb.append(", problem=").append(problem);
+        sb.append(", employee=").append(employee);
         sb.append('}');
         return sb.toString();
     }
