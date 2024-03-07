@@ -1,6 +1,5 @@
 package com.ispan.projectX.dao;
 
-
 import com.ispan.projectX.entity.Complaint;
 import com.ispan.projectX.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,13 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
+public interface ComplaintRepository extends JpaRepository<Complaint,Integer> {
 
-    Employee findByEmployeeId(Integer Id);
+      //使用員工ID反向找到該員工所有的Complaint
+      List<Complaint> findByEmployeeEmployeeId(Integer employeeId);
 
-    @Query("from Complaint where employee = :employee")
-    List<Complaint> findComplaintByEmployee(@Param("employee") Employee employee);
-
-
-
+      Complaint findByComplaintId(Integer complaintId);
 }
