@@ -51,7 +51,6 @@ public class Users {
 
     @Column(name = "bank_account1")
     private String bankAccount1;
-=======
-public class Users {
->>>>>>> 06022c8cf6399e7ad0d8d5f7289a9dd449c4b25a
+
+    
 }
