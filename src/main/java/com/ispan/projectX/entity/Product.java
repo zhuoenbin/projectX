@@ -72,7 +72,29 @@ public class Product {
     @JoinColumn(name = "seller_id", referencedColumnName = "seller_id", insertable = false, updatable = false)
     private Seller seller;
 
-    // Getters and setters
+    public Product() {
+    }
+
+    public Product(Integer productId, String productName, Integer sellerId, Integer employeeId, Integer unitPrice, Integer categoryId, Integer stock, Integer reservedQuantity, Date listingDate, Date modifiedDate, String description, String productStatus, Integer promotionId, Integer officialDiscountId, Integer sellerDiscountId, OfficialActivityDiscount officialActivityDiscount, SellerActivityDiscount sellerActivityDiscount, Seller seller) {
+        this.productId = productId;
+        this.productName = productName;
+        this.sellerId = sellerId;
+        this.employeeId = employeeId;
+        this.unitPrice = unitPrice;
+        this.categoryId = categoryId;
+        this.stock = stock;
+        this.reservedQuantity = reservedQuantity;
+        this.listingDate = listingDate;
+        this.modifiedDate = modifiedDate;
+        this.description = description;
+        this.productStatus = productStatus;
+        this.promotionId = promotionId;
+        this.officialDiscountId = officialDiscountId;
+        this.sellerDiscountId = sellerDiscountId;
+        this.officialActivityDiscount = officialActivityDiscount;
+        this.sellerActivityDiscount = sellerActivityDiscount;
+        this.seller = seller;
+    }
 
     public Integer getProductId() {
         return productId;
@@ -216,5 +238,30 @@ public class Product {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Product{");
+        sb.append("productId=").append(productId);
+        sb.append(", productName='").append(productName).append('\'');
+        sb.append(", sellerId=").append(sellerId);
+        sb.append(", employeeId=").append(employeeId);
+        sb.append(", unitPrice=").append(unitPrice);
+        sb.append(", categoryId=").append(categoryId);
+        sb.append(", stock=").append(stock);
+        sb.append(", reservedQuantity=").append(reservedQuantity);
+        sb.append(", listingDate=").append(listingDate);
+        sb.append(", modifiedDate=").append(modifiedDate);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", productStatus='").append(productStatus).append('\'');
+        sb.append(", promotionId=").append(promotionId);
+        sb.append(", officialDiscountId=").append(officialDiscountId);
+        sb.append(", sellerDiscountId=").append(sellerDiscountId);
+        sb.append(", officialActivityDiscount=").append(officialActivityDiscount);
+        sb.append(", sellerActivityDiscount=").append(sellerActivityDiscount);
+        sb.append(", seller=").append(seller);
+        sb.append('}');
+        return sb.toString();
     }
 }

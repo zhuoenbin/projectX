@@ -52,6 +52,25 @@ public class Users {
     @Column(name = "bank_account1")
     private String bankAccount1;
 
+    public Users(Integer userId, String lastName, String firstName, String userEmail, String userPassword, String userGender, Date birthDate, String buyerViolationCount, Date lastLoginTime, Integer sellerQualified, String userStatus, String bankIdAccount1, String bankAccount1) {
+        this.userId = userId;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userGender = userGender;
+        this.birthDate = birthDate;
+        this.buyerViolationCount = buyerViolationCount;
+        this.lastLoginTime = lastLoginTime;
+        this.sellerQualified = sellerQualified;
+        this.userStatus = userStatus;
+        this.bankIdAccount1 = bankIdAccount1;
+        this.bankAccount1 = bankAccount1;
+    }
+
+    public Users() {
+    }
+
     public Integer getUserId() {
         return userId;
     }
@@ -154,5 +173,25 @@ public class Users {
 
     public void setBankAccount1(String bankAccount1) {
         this.bankAccount1 = bankAccount1;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Users{");
+        sb.append("userId=").append(userId);
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", userEmail='").append(userEmail).append('\'');
+        sb.append(", userPassword='").append(userPassword).append('\'');
+        sb.append(", userGender='").append(userGender).append('\'');
+        sb.append(", birthDate=").append(birthDate);
+        sb.append(", buyerViolationCount='").append(buyerViolationCount).append('\'');
+        sb.append(", lastLoginTime=").append(lastLoginTime);
+        sb.append(", sellerQualified=").append(sellerQualified);
+        sb.append(", userStatus='").append(userStatus).append('\'');
+        sb.append(", bankIdAccount1='").append(bankIdAccount1).append('\'');
+        sb.append(", bankAccount1='").append(bankAccount1).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

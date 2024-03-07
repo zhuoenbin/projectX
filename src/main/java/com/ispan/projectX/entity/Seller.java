@@ -56,6 +56,27 @@ public class Seller {
     @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
     private Users user;
 
+    public Seller() {
+    }
+
+    public Seller(Integer sellerId, Integer sellerName, String sellerImage, String sellerImagePublicId, String sellerIntroduce, Date joinTime, Date lastLoginTime, Integer sellerViolationCount, String bankIdAccount1, String bankAccount1, String bankIdAccount2, String bankAccount2, String bankIdAccount3, String bankAccount3, Users user) {
+        this.sellerId = sellerId;
+        this.sellerName = sellerName;
+        this.sellerImage = sellerImage;
+        this.sellerImagePublicId = sellerImagePublicId;
+        this.sellerIntroduce = sellerIntroduce;
+        this.joinTime = joinTime;
+        this.lastLoginTime = lastLoginTime;
+        this.sellerViolationCount = sellerViolationCount;
+        this.bankIdAccount1 = bankIdAccount1;
+        this.bankAccount1 = bankAccount1;
+        this.bankIdAccount2 = bankIdAccount2;
+        this.bankAccount2 = bankAccount2;
+        this.bankIdAccount3 = bankIdAccount3;
+        this.bankAccount3 = bankAccount3;
+        this.user = user;
+    }
+
     public Integer getSellerId() {
         return sellerId;
     }
@@ -174,5 +195,27 @@ public class Seller {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Seller{");
+        sb.append("sellerId=").append(sellerId);
+        sb.append(", sellerName=").append(sellerName);
+        sb.append(", sellerImage='").append(sellerImage).append('\'');
+        sb.append(", sellerImagePublicId='").append(sellerImagePublicId).append('\'');
+        sb.append(", sellerIntroduce='").append(sellerIntroduce).append('\'');
+        sb.append(", joinTime=").append(joinTime);
+        sb.append(", lastLoginTime=").append(lastLoginTime);
+        sb.append(", sellerViolationCount=").append(sellerViolationCount);
+        sb.append(", bankIdAccount1='").append(bankIdAccount1).append('\'');
+        sb.append(", bankAccount1='").append(bankAccount1).append('\'');
+        sb.append(", bankIdAccount2='").append(bankIdAccount2).append('\'');
+        sb.append(", bankAccount2='").append(bankAccount2).append('\'');
+        sb.append(", bankIdAccount3='").append(bankIdAccount3).append('\'');
+        sb.append(", bankAccount3='").append(bankAccount3).append('\'');
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString();
     }
 }
