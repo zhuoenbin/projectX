@@ -52,5 +52,107 @@ public class Users {
     @Column(name = "bank_account1")
     private String bankAccount1;
 
-    
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getBuyerViolationCount() {
+        return buyerViolationCount;
+    }
+
+    public void setBuyerViolationCount(String buyerViolationCount) {
+        this.buyerViolationCount = buyerViolationCount;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Integer getSellerQualified() {
+        return sellerQualified;
+    }
+
+    public void setSellerQualified(Integer sellerQualified) {
+        this.sellerQualified = sellerQualified;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getBankIdAccount1() {
+        return bankIdAccount1;
+    }
+
+    public void setBankIdAccount1(String bankIdAccount1) {
+        this.bankIdAccount1 = bankIdAccount1;
+    }
+
+    public String getBankAccount1() {
+        return bankAccount1;
+    }
+
+    public void setBankAccount1(String bankAccount1) {
+        this.bankAccount1 = bankAccount1;
+    }
 }
