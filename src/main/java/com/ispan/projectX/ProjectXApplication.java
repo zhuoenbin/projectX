@@ -1,9 +1,7 @@
 package com.ispan.projectX;
 
-import com.ispan.projectX.dao.ComplaintRepository;
-import com.ispan.projectX.dao.EmployeeRepository;
-import com.ispan.projectX.entity.Complaint;
-import com.ispan.projectX.entity.Employee;
+import com.ispan.projectX.dao.*;
+import com.ispan.projectX.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,13 +23,31 @@ public class ProjectXApplication {
 
 
 	@Bean
-	public CommandLineRunner commandLineRunner(ComplaintRepository complaintRepository,EmployeeRepository employeeRepository){
+	public CommandLineRunner commandLineRunner(ComplaintRepository complaintRepository,
+											   EmployeeRepository employeeRepository,
+											   UsersRepository usersRepository,
+											   SellerRepository sellerRepository,
+											   PushReceiverGroupRepository pushReceiverGroupRepository) {
 		return runner -> {
-			findComplaintByEmployee(employeeRepository);
+			Seller tmpsell = sellerRepository.findBySellerId(1);
+
+			PushReceiverGroup group = new PushReceiverGroup();
+			group.setGroupName("Group 1");
+			group.setSeller(tmpsell); // 设置卖家对象
+			group.setGroupBuildTime(new Date()); // 设置建立时间
+			group.setGroupUpdateTime(new Date()); // 设置更新时间
+
+
+			pushReceiverGroupRepository.save(group);
         };
 	}
 
-
+	//使用Seller	Repository 帶入參數SellerId，反向找出Users
+	private void findUserBySellerId(SellerRepository sellerRepository){
+		Seller seller = sellerRepository.findBySellerId(1);
+		Users user = seller.getUser();
+		System.out.println(user.toString());
+	}
 
 	//找出該employee所處理的所有Complaint(By Employee物件)，使用employeeRepository
 	private void findComplaintByEmployee(EmployeeRepository employeeRepository){
