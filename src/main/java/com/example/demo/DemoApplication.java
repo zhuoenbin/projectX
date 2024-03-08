@@ -1,13 +1,13 @@
-package com.ispan.projectX;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectXApplication {
+public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectXApplication.class, args);
+		SpringApplication.run(DemoApplication.class, args);
 	}
 
 }
