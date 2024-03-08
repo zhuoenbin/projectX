@@ -14,6 +14,14 @@ public class Problem {
     @Column(name = "problem_name", length = 30)
     private String problemName;
 
+    public Problem() {
+    }
+
+    public Problem(Integer problemId, String problemName) {
+        this.problemId = problemId;
+        this.problemName = problemName;
+    }
+
     public Integer getProblemId() {
         return problemId;
     }
@@ -28,5 +36,14 @@ public class Problem {
 
     public void setProblemName(String problemName) {
         this.problemName = problemName;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Problem{");
+        sb.append("problemId=").append(problemId);
+        sb.append(", problemName='").append(problemName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -1,11 +1,12 @@
-package com.ispan.projectX.entity;
+package com.ispan.projectX.entity.discount;
 
+import com.ispan.projectX.entity.Seller;
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "seller_coupon_list")
-public class SellerCouponList {
+@Table(name = "seller_discount_list")
+public class SellerDiscountList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,21 +21,18 @@ public class SellerCouponList {
     private String listName;
 
     @Column(name = "list_build_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date listBuildTime;
+    private LocalDateTime listBuildTime;
 
     @Column(name = "list_update_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date listUpdateTime;
+    private LocalDateTime listUpdateTime;
 
     @Column(name = "list_status")
     private Integer listStatus;
 
-    public SellerCouponList() {
+    public SellerDiscountList() {
     }
 
-    public SellerCouponList(Long listId, Seller listOwner, String listName, Date listBuildTime, Date listUpdateTime, Integer listStatus) {
-        this.listId = listId;
+    public SellerDiscountList(Seller listOwner, String listName, LocalDateTime listBuildTime, LocalDateTime listUpdateTime, Integer listStatus) {
         this.listOwner = listOwner;
         this.listName = listName;
         this.listBuildTime = listBuildTime;
@@ -66,19 +64,19 @@ public class SellerCouponList {
         this.listName = listName;
     }
 
-    public Date getListBuildTime() {
+    public LocalDateTime getListBuildTime() {
         return listBuildTime;
     }
 
-    public void setListBuildTime(Date listBuildTime) {
+    public void setListBuildTime(LocalDateTime listBuildTime) {
         this.listBuildTime = listBuildTime;
     }
 
-    public Date getListUpdateTime() {
+    public LocalDateTime getListUpdateTime() {
         return listUpdateTime;
     }
 
-    public void setListUpdateTime(Date listUpdateTime) {
+    public void setListUpdateTime(LocalDateTime listUpdateTime) {
         this.listUpdateTime = listUpdateTime;
     }
 
@@ -92,7 +90,7 @@ public class SellerCouponList {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("SellerCouponList{");
+        final StringBuffer sb = new StringBuffer("SellerDiscountList{");
         sb.append("listId=").append(listId);
         sb.append(", listOwner=").append(listOwner);
         sb.append(", listName='").append(listName).append('\'');
@@ -102,5 +100,4 @@ public class SellerCouponList {
         sb.append('}');
         return sb.toString();
     }
-
 }

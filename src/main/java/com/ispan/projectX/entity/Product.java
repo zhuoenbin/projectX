@@ -1,5 +1,6 @@
 //package com.ispan.projectX.entity;
 //
+//import com.ispan.projectX.entity.discount.SellerActivityDiscount;
 //import jakarta.persistence.*;
 //import org.springframework.format.annotation.DateTimeFormat;
 //
@@ -258,49 +259,9 @@
 //        sb.append(", promotionId=").append(promotionId);
 //        sb.append(", officialDiscountId=").append(officialDiscountId);
 //        sb.append(", sellerDiscountId=").append(sellerDiscountId);
-//        sb.append(", officialActivityDiscount=").append(officialActivi
+//        sb.append(", officialActivityDiscount=").append(officialActivityDiscount);
 //
 //        sb.append('}');
 //        return sb.toString();
-//    }INSERT INTO `user` (
-//    `last_name`,
-//    `first_name`,
-//    `user_email`,
-//    `user_password`,
-//    `user_gender`,
-//    `birth_date`,
-//    `buyer_violation_count`,
-//    `last_login_time`,
-//    `seller_qualified`,
-//    `user_status`,
-//    `bank_id_account1`,
-//    `bank_account1`
-//) VALUES
-//('Doe', 'John', 'john.doe@example.com', 'password123', 'Male', '1990-01-01', 0, '2024-03-05 12:00:00', 0, 'Active', '001', '1234567890'),
-//('Doe', 'Jane', 'jane.doe@example.com', 'password456', 'Female', '1992-02-02', 1, '2024-03-06 13:00:00', 1, 'Inactive', '004', '9876543210'),
-//('Smith', 'Bob', 'bob.smith@example.com', 'password789', 'Male', '1985-03-03', 0, '2024-03-07 14:00:00', 2, 'Active', '007', '1111222233'),
-//('Johnson', 'Alice', 'alice.johnson@example.com', 'passwordabc', 'Female', '1988-04-04', 2, '2024-03-08 15:00:00', 1, 'Inactive', '010', '9999888877'),
-//('Brown', 'Charlie', 'charlie.brown@example.com', 'passwordxyz', 'Male', '1995-05-05', 0, '2024-03-09 16:00:00', 2, 'Active', '013', '3333444455');
-//
-//
-//INSERT INTO `seller` (
-//    `seller_id`,
-//    `seller_name`,
-//    `seller_image`,
-//    `seller_image_public_id`,
-//    `seller_introduce`,
-//    `join_time`,
-//    `last_login_time`,
-//    `seller_violation_count`,
-//    `bank_id_account1`,
-//    `bank_account1`,
-//    `bank_id_account2`,
-//    `bank_account2`,
-//    `bank_id_account3`,
-//    `bank_account3`
-//) VALUES
-//(1, 2, 'image_url_1.jpg', 'public_id_123_1', 'Introduction 1', '2024-03-05 12:00:00', '2024-03-05 12:30:00', 0, '001', '1234567890', '002', '9876543210', '003', '5555555555'),
-//(2, 5, 'image_url_2.jpg', 'public_id_123_2', 'Introduction 2', '2024-03-06 13:00:00', '2024-03-06 13:30:00', 1, '004', '9876543210', '005', '1234567890', '006', '5555555555'),
-//(3, 7, 'image_url_3.jpg', 'public_id_123_3', 'Introduction 3', '2024-03-07 14:00:00', '2024-03-07 14:30:00', 0, '007', '1111222233', '008', '4444555566', '009', '7777888899'),
-//(4, 10, 'image_url_4.jpg', 'public_id_123_4', 'Introduction 4', '2024-03-08 15:00:00', '2024-03-08 15:30:00', 2, '010', '9999888877', '011', '1111222233', '012', '4444555566');
+//    }
 //}
