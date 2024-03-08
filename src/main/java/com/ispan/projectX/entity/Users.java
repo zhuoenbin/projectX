@@ -1,9 +1,11 @@
 package com.ispan.projectX.entity;
 
+import com.ispan.projectX.entity.pushmsg.UserPushMessage;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "user")
@@ -14,46 +16,51 @@ public class Users {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "user_email")
+    @Column(name = "user_email", nullable = false, unique = true)
     private String userEmail;
 
-    @Column(name = "user_password")
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
-    @Column(name = "user_gender")
+    @Column(name = "user_gender", length = 10)
     private String userGender;
 
     @Column(name = "birth_date")
     private Date birthDate;
 
     @Column(name = "buyer_violation_count")
-    private String buyerViolationCount;
+    private Integer buyerViolationCount;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss EE")
     @Column(name = "last_login_time")
     private Date lastLoginTime;
 
     @Column(name = "seller_qualified")
     private Integer sellerQualified;
 
-    @Column(name = "user_status")
+    @Column(name = "user_status", length = 10)
     private String userStatus;
 
-    @Column(name = "bank_id_account1")
+    @Column(name = "bank_id_account1", length = 10)
     private String bankIdAccount1;
 
-    @Column(name = "bank_account1")
+    @Column(name = "bank_account1", length = 50)
     private String bankAccount1;
 
-    public Users(Integer userId, String lastName, String firstName, String userEmail, String userPassword, String userGender, Date birthDate, String buyerViolationCount, Date lastLoginTime, Integer sellerQualified, String userStatus, String bankIdAccount1, String bankAccount1) {
-        this.userId = userId;
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY ,
+            cascade = {CascadeType.ALL})
+    private List<UserPushMessage> userPushMessages;
+
+    public Users() {
+    }
+
+    public Users(String lastName, String firstName, String userEmail, String userPassword, String userGender, Date birthDate, Integer buyerViolationCount, Date lastLoginTime, Integer sellerQualified, String userStatus, String bankIdAccount1, String bankAccount1) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.userEmail = userEmail;
@@ -66,9 +73,6 @@ public class Users {
         this.userStatus = userStatus;
         this.bankIdAccount1 = bankIdAccount1;
         this.bankAccount1 = bankAccount1;
-    }
-
-    public Users() {
     }
 
     public Integer getUserId() {
@@ -127,11 +131,11 @@ public class Users {
         this.birthDate = birthDate;
     }
 
-    public String getBuyerViolationCount() {
+    public Integer getBuyerViolationCount() {
         return buyerViolationCount;
     }
 
-    public void setBuyerViolationCount(String buyerViolationCount) {
+    public void setBuyerViolationCount(Integer buyerViolationCount) {
         this.buyerViolationCount = buyerViolationCount;
     }
 
@@ -175,9 +179,26 @@ public class Users {
         this.bankAccount1 = bankAccount1;
     }
 
+    public List<UserPushMessage> getUserPushMessages() {
+        return userPushMessages;
+    }
+
+    public void setUserPushMessages(List<UserPushMessage> userPushMessages) {
+        this.userPushMessages = userPushMessages;
+    }
+
+    public void add(UserPushMessage userPushMessage) {
+        if (userPushMessages == null) {
+            userPushMessages = new ArrayList<>();
+        }
+        userPushMessages.add(userPushMessage);
+        userPushMessage.setUser(this);
+    }
+
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Users{");
+        final StringBuffer sb = new StringBuffer("User{");
         sb.append("userId=").append(userId);
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
@@ -185,7 +206,7 @@ public class Users {
         sb.append(", userPassword='").append(userPassword).append('\'');
         sb.append(", userGender='").append(userGender).append('\'');
         sb.append(", birthDate=").append(birthDate);
-        sb.append(", buyerViolationCount='").append(buyerViolationCount).append('\'');
+        sb.append(", buyerViolationCount=").append(buyerViolationCount);
         sb.append(", lastLoginTime=").append(lastLoginTime);
         sb.append(", sellerQualified=").append(sellerQualified);
         sb.append(", userStatus='").append(userStatus).append('\'');

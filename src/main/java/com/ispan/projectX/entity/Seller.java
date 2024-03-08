@@ -1,7 +1,11 @@
 package com.ispan.projectX.entity;
 
+import com.ispan.projectX.entity.pushmsg.PushReceiverGroup;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "seller")
@@ -10,71 +14,55 @@ public class Seller {
     @Id
     @Column(name = "seller_id")
     private Integer sellerId;
+    @OneToOne
+    @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
+    private Users user;
 
     @Column(name = "seller_name")
     private Integer sellerName;
 
-    @Column(name = "seller_image")
+    @Column(name = "seller_image", length = 1000)
     private String sellerImage;
 
-    @Column(name = "seller_image_public_id")
+    @Column(name = "seller_image_public_id", length = 500)
     private String sellerImagePublicId;
 
-    @Column(name = "seller_introduce")
+    @Column(name = "seller_introduce", length = 500)
     private String sellerIntroduce;
 
     @Column(name = "join_time")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date joinTime;
 
     @Column(name = "last_login_time")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date lastLoginTime;
 
     @Column(name = "seller_violation_count")
     private Integer sellerViolationCount;
 
-    @Column(name = "bank_id_account1")
+    @Column(name = "bank_id_account1", length = 10)
     private String bankIdAccount1;
 
-    @Column(name = "bank_account1")
+    @Column(name = "bank_account1", length = 50)
     private String bankAccount1;
 
-    @Column(name = "bank_id_account2")
+    @Column(name = "bank_id_account2", length = 10)
     private String bankIdAccount2;
 
-    @Column(name = "bank_account2")
+    @Column(name = "bank_account2", length = 50)
     private String bankAccount2;
 
-    @Column(name = "bank_id_account3")
+    @Column(name = "bank_id_account3", length = 10)
     private String bankIdAccount3;
 
-    @Column(name = "bank_account3")
+    @Column(name = "bank_account3", length = 50)
     private String bankAccount3;
 
-    @OneToOne
-    @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
-    private Users user;
+    @OneToMany(mappedBy = "seller",
+            fetch = FetchType.LAZY ,
+            cascade = {CascadeType.ALL})
+    private List<PushReceiverGroup> pushReceiverGroups;
 
     public Seller() {
-    }
-
-    public Seller(Integer sellerId, Integer sellerName, String sellerImage, String sellerImagePublicId, String sellerIntroduce, Date joinTime, Date lastLoginTime, Integer sellerViolationCount, String bankIdAccount1, String bankAccount1, String bankIdAccount2, String bankAccount2, String bankIdAccount3, String bankAccount3, Users user) {
-        this.sellerId = sellerId;
-        this.sellerName = sellerName;
-        this.sellerImage = sellerImage;
-        this.sellerImagePublicId = sellerImagePublicId;
-        this.sellerIntroduce = sellerIntroduce;
-        this.joinTime = joinTime;
-        this.lastLoginTime = lastLoginTime;
-        this.sellerViolationCount = sellerViolationCount;
-        this.bankIdAccount1 = bankIdAccount1;
-        this.bankAccount1 = bankAccount1;
-        this.bankIdAccount2 = bankIdAccount2;
-        this.bankAccount2 = bankAccount2;
-        this.bankIdAccount3 = bankIdAccount3;
-        this.bankAccount3 = bankAccount3;
-        this.user = user;
     }
 
     public Integer getSellerId() {
@@ -83,6 +71,14 @@ public class Seller {
 
     public void setSellerId(Integer sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public Integer getSellerName() {
@@ -189,18 +185,27 @@ public class Seller {
         this.bankAccount3 = bankAccount3;
     }
 
-    public Users getUser() {
-        return user;
+    public List<PushReceiverGroup> getPushReceiverGroups() {
+        return pushReceiverGroups;
     }
 
-    public void setUser(Users user) {
-        this.user = user;
+    public void setPushReceiverGroups(List<PushReceiverGroup> pushReceiverGroups) {
+        this.pushReceiverGroups = pushReceiverGroups;
+    }
+
+    public void add(PushReceiverGroup tmpPushReceiverGroup) {
+        if(pushReceiverGroups==null){
+            pushReceiverGroups = new ArrayList<>();
+        }
+        pushReceiverGroups.add(tmpPushReceiverGroup);
+        tmpPushReceiverGroup.setSeller(this);
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Seller{");
-        sb.append("sellerId=").append(sellerId);
+
+        sb.append(", user=").append(user);
         sb.append(", sellerName=").append(sellerName);
         sb.append(", sellerImage='").append(sellerImage).append('\'');
         sb.append(", sellerImagePublicId='").append(sellerImagePublicId).append('\'');
@@ -214,7 +219,6 @@ public class Seller {
         sb.append(", bankAccount2='").append(bankAccount2).append('\'');
         sb.append(", bankIdAccount3='").append(bankIdAccount3).append('\'');
         sb.append(", bankAccount3='").append(bankAccount3).append('\'');
-        sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();
     }
