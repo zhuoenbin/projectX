@@ -1,5 +1,6 @@
 package com.ispan.projectX.entity;
 
+import com.ispan.projectX.entity.pushmsg.PushReceiverGroup;
 import com.ispan.projectX.entity.pushmsg.UserPushMessage;
 import jakarta.persistence.*;
 
@@ -57,6 +58,12 @@ public class Users {
             cascade = {CascadeType.ALL})
     private List<UserPushMessage> userPushMessages;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name="push_receiver_group_member", joinColumns = @JoinColumn(name="member_id"),
+            inverseJoinColumns = @JoinColumn(name="group_id"))
+    private List<PushReceiverGroup> pushReceiverGroups;
+
     public Users() {
     }
 
@@ -74,6 +81,7 @@ public class Users {
         this.bankIdAccount1 = bankIdAccount1;
         this.bankAccount1 = bankAccount1;
     }
+
 
     public Integer getUserId() {
         return userId;
@@ -195,6 +203,13 @@ public class Users {
         userPushMessage.setUser(this);
     }
 
+    public List<PushReceiverGroup> getPushReceiverGroups() {
+        return pushReceiverGroups;
+    }
+
+    public void setPushReceiverGroups(List<PushReceiverGroup> pushReceiverGroups) {
+        this.pushReceiverGroups = pushReceiverGroups;
+    }
 
     @Override
     public String toString() {

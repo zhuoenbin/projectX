@@ -4,6 +4,7 @@ import com.ispan.projectX.entity.Seller;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "push_receiver_group")
@@ -29,6 +30,12 @@ public class PushReceiverGroup {
 
     @Column(name = "group_update_time")
     private Date groupUpdateTime;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name="push_receiver_group_member", joinColumns = @JoinColumn(name="group_id"),
+            inverseJoinColumns = @JoinColumn(name="member_id"))
+    private List<PushReceiverGroup> pushReceiverGroups;
 
     public PushReceiverGroup() {
     }

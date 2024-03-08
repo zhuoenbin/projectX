@@ -58,7 +58,7 @@ public class Seller {
     private String bankAccount3;
 
     @OneToMany(mappedBy = "seller",
-            fetch = FetchType.LAZY ,
+            fetch = FetchType.EAGER,
             cascade = {CascadeType.ALL})
     private List<PushReceiverGroup> pushReceiverGroups;
 

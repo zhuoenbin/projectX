@@ -3,6 +3,7 @@ package com.ispan.projectX;
 import com.ispan.projectX.dao.*;
 import com.ispan.projectX.entity.*;
 import com.ispan.projectX.entity.pushmsg.PushReceiverGroup;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,25 +29,35 @@ public class ProjectXApplication {
 											   SellerRepository sellerRepository,
 											   PushReceiverGroupRepository pushReceiverGroupRepository) {
 		return runner -> {
-			Seller sel = sellerRepository.findBySellerId(2);
+			Users user = usersRepository.findAllWithPushReceiverGroups(1);
 
-			PushReceiverGroup group2 = new PushReceiverGroup();
-			group2.setGroupName("Group B");
-			group2.setSeller(sel);
-			group2.setGroupBuildTime(new Date());
-			group2.setGroupUpdateTime(new Date());
+			List<PushReceiverGroup> lis = user.getPushReceiverGroups();
 
-			pushReceiverGroupRepository.save(group2);
-
-
-
-
-
+			for(PushReceiverGroup li:lis){
+				System.out.println(li.toString());
+			}
 
         };
 	}
 
+	//PushGroup加入seller的關係
+	private void addRelationBetweenPushGroupAndSeller(SellerRepository sellerRepository,
+													  PushReceiverGroupRepository pushReceiverGroupRepository){
+		Seller sell = sellerRepository.findByPushReceiverGroupsWithSellerId(2);
+		PushReceiverGroup msg = pushReceiverGroupRepository.findByGroupId(1);
+		sell.add(msg);
+		sellerRepository.save(sell);
+	}
 
+	//打印seller裡的pushGroup，seller的 fetch = FetchType.LAZY，去看seller JPA的findByPushReceiverGroupsWithSellerId方法(使用join fetch)
+	private  void findByPushReceiverGroupsBySellerId(SellerRepository sellerRepository){
+		Seller sell = sellerRepository.findByPushReceiverGroupsWithSellerId(2);
+		List<PushReceiverGroup> lis = sell.getPushReceiverGroups();
+
+		for(PushReceiverGroup li:lis){
+			System.out.println(li.toString());
+		}
+	}
 	//新增seller，這資料表設計有點怪，必須抓user.id進去seller.id
 	private void addSeller(SellerRepository sellerRepository,
 						   UsersRepository usersRepository){
