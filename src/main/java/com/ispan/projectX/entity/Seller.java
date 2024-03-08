@@ -1,5 +1,6 @@
 package com.ispan.projectX.entity;
 
+import com.ispan.projectX.entity.pushmsg.PushReceiverGroup;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

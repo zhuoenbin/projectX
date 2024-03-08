@@ -1,5 +1,6 @@
 package com.ispan.projectX.entity;
 
+import com.ispan.projectX.entity.pushmsg.UserPushMessage;
 import jakarta.persistence.*;
 
 import java.util.Date;

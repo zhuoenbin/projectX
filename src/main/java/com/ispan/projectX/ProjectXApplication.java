@@ -2,7 +2,7 @@ package com.ispan.projectX;
 
 import com.ispan.projectX.dao.*;
 import com.ispan.projectX.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ispan.projectX.entity.pushmsg.PushReceiverGroup;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class ProjectXApplication {
@@ -29,22 +28,51 @@ public class ProjectXApplication {
 											   SellerRepository sellerRepository,
 											   PushReceiverGroupRepository pushReceiverGroupRepository) {
 		return runner -> {
-			Seller tmpsell = sellerRepository.findBySellerId(1);
+			Seller sel = sellerRepository.findBySellerId(2);
 
-			PushReceiverGroup group = new PushReceiverGroup();
-			group.setGroupName("Group 1");
-			group.setSeller(tmpsell); // 设置卖家对象
-			group.setGroupBuildTime(new Date()); // 设置建立时间
-			group.setGroupUpdateTime(new Date()); // 设置更新时间
+			PushReceiverGroup group2 = new PushReceiverGroup();
+			group2.setGroupName("Group B");
+			group2.setSeller(sel);
+			group2.setGroupBuildTime(new Date());
+			group2.setGroupUpdateTime(new Date());
+
+			pushReceiverGroupRepository.save(group2);
 
 
-			pushReceiverGroupRepository.save(group);
+
+
+
+
         };
 	}
 
+
+	//新增seller，這資料表設計有點怪，必須抓user.id進去seller.id
+	private void addSeller(SellerRepository sellerRepository,
+						   UsersRepository usersRepository){
+
+		Users user = usersRepository.findByUserId(2);
+
+		Seller seller = new Seller();
+		seller.setSellerId(user.getUserId());
+		seller.setSellerName(123);
+		seller.setSellerImage("seller_image_url_1");
+		seller.setSellerImagePublicId("public_id_1");
+		seller.setSellerIntroduce("Introduce for Seller 1");
+		seller.setJoinTime(new Date());
+		seller.setLastLoginTime(new Date());
+		seller.setSellerViolationCount(0);
+		seller.setBankIdAccount1("bank_id_1");
+		seller.setBankAccount1("bank_account_1");
+		seller.setBankIdAccount2("bank_id_2");
+		seller.setBankAccount2("bank_account_2");
+		seller.setBankIdAccount3("bank_id_3");
+		seller.setBankAccount3("bank_account_3");
+		sellerRepository.save(seller);
+	}
 	//使用Seller	Repository 帶入參數SellerId，反向找出Users
 	private void findUserBySellerId(SellerRepository sellerRepository){
-		Seller seller = sellerRepository.findBySellerId(1);
+		Seller seller = sellerRepository.findBySellerId(2);
 		Users user = seller.getUser();
 		System.out.println(user.toString());
 	}

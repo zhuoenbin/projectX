@@ -1,5 +1,6 @@
-package com.ispan.projectX.entity;
+package com.ispan.projectX.entity.pushmsg;
 
+import com.ispan.projectX.entity.Seller;
 import jakarta.persistence.*;
 
 import java.util.Date;
